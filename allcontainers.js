@@ -131,10 +131,15 @@ function allContainers (opts) {
   }
 
   function toEmit(container) {
-    return {
-      id: container.Id,
-      image: container.Image,
-      name: container.Names[0].replace(/^\//, '')
+    try {
+      return {
+        id: container.Id,
+        image: container.Image,
+        name: container.Names[0].replace(/^\//, '')
+      }
+    } catch(e) {
+      console.log("AllContainers Failure!", e)
+      console.log(e.stack)
     }
   }
 }
